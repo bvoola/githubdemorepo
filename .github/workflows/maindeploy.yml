@@ -5,4 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: get code
-        run: echo "getting code"
+        uses: actions/checkout@v3
+      - name: list files
+        run: ls
+      - name: install sfdx cli
+        run: echo" installing sfdx cli"
