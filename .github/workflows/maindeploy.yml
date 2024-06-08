@@ -4,5 +4,5 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      -name: get code
-       run: echo "getting code"
+      - name: get code
+        run: echo "getting code"
