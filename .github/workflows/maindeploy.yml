@@ -1,7 +1,8 @@
 name: deploy developer code
 on: push
 jobs:
-  name: validate
-  steps:
-    -name: get code
-    -run: echo "getting code"
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      -name: get code
+      -run: echo "getting code"
