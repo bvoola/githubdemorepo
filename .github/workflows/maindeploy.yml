@@ -9,4 +9,4 @@ jobs:
       - name: list files
         run: ls
       - name: install sfdx cli
-        run: echo" installing sfdx cli"
+        run: echo " installing sfdx cli"
