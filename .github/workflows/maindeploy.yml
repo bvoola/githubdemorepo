@@ -10,3 +10,5 @@ jobs:
         run: ls
       - name: install sfdx cli
         uses: sfdx-actions/setup-sfdx@v1
+      - name: check sfdx version
+        run: sfdx -v
