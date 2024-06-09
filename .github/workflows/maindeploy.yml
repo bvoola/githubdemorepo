@@ -1,5 +1,5 @@
 name: deploy developer code
-on: push
+on: [push, workflow_dispatch]
 jobs:
   validate:
     runs-on: ubuntu-latest
