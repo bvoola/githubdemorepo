@@ -3,6 +3,8 @@ on: [push, workflow_dispatch]
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      SFDX_ACCESS_TOKEN: ${{ secrets.SFDX_ACCESS_TOKEN }}
    # container:
    #   image: radon57/sfdx-cli
     steps:
