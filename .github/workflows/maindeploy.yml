@@ -14,3 +14,5 @@ jobs:
       #  uses: sfdx-actions/setup-sfdx@v1
       - name: check sfdx version
         run: sfdx -v
+      - name: authorize org
+        run: sf org login access-token --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
