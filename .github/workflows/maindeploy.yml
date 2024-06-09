@@ -15,4 +15,7 @@ jobs:
       - name: check sfdx version
         run: sfdx -v
       - name: authorize org
-        run: sfdx auth:accesstoken:store --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
+        run: |
+          sfdx auth:accesstoken:store --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
+          sfdx force:org:display
+        
