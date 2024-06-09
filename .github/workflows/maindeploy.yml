@@ -21,6 +21,6 @@ jobs:
       - name: authorize org
         run: |
           sf org login access-token --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
-          sf org display user
+          sf org display user -o bvoola@gmail.com.copadoproject
           
         
