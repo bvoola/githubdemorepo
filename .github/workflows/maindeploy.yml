@@ -13,10 +13,12 @@ jobs:
       - name: install sfdx cli
         run: npm install @salesforce/cli --global
       - name: check sfdx version
-        run: sfdx -v
+        run: |
+          sfdx -v
+          sf -v
       - name: authorize org
         run: |
-          sfdx auth:accesstoken:store --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
+          sf org login access-token --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
           sf org display user
           
         
