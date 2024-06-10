@@ -1,0 +1,26 @@
+name: deploy developer code
+on: [push, workflow_dispatch]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      SF_ACCESS_TOKEN: ${{ secrets.SF_ACCESS_TOKEN }}
+   # container:
+   #   image: radon57/sfdx-cli
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: list files
+        run: ls
+      - name: install sfdx cli
+        run: npm install @salesforce/cli --global
+      - name: check sfdx version
+        run: |
+          sfdx -v
+          sf -v
+      - name: authorize org
+        run: |
+          sf org login access-token --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
+          sf org display user -o bvoola@gmail.com.copadoproject
+          
+        
