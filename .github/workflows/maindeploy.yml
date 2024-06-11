@@ -20,7 +20,6 @@ jobs:
       - name: install sfdx cli & lint
         run: |
           node --version
-          npm install -g npm
           npm install @salesforce/cli --global
           npm install --save-dev lint-staged
           echo y | sf plugins:install sfdx-git-delta
