@@ -43,6 +43,7 @@ jobs:
       - name: generate package
         run: |
           echo "generating delta changes package"
+          git config --global --add safe.directory /__w/core-platform/core-platform
           echo "source branch: ${{ github.head_ref }} target branch: ${{ github.base_ref }}"
           sf sgd:source:delta -a 59.0 --to ${{github.head_ref}} --from ${{github.base_ref}} --output .
           git log
