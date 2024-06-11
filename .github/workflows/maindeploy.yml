@@ -20,7 +20,9 @@ jobs:
           sf -v
       - name: authorize org
         run: |
-          sf org login access-token --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
-          sf org display user -o bvoola@gmail.com.copadoproject
+          echo ${{secrets.SF_AUTH_URL}} > ./SF_SFDX_URL.txt
+          sfdx auth:sfdxurl:store -f ./SF_SFDX_URL.txt
+         # sf org login access-token --instance-url https://copadotrial91510619.my.salesforce.com/ --no-prompt
+         # sf org display user -o bvoola@gmail.com.copadoproject
           
         
