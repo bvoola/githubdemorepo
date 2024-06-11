@@ -35,8 +35,15 @@ jobs:
           echo "package.xml"
           echo "destructivechanges.xml"
       - name: eslint
-        run: echo "eslint results"
+        run: |
+          echo "eslint results"
+          npm run lint
 
+      - name: verify prettier
+        run: |
+          echo " prettier results"
+          npm run prettier:verify
+          
       - name: pmd scan
         run: echo "pmd results"
 
