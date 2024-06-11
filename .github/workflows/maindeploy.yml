@@ -37,8 +37,11 @@ jobs:
       - name: generate package
         run: |
           echo "generating delta changes package"
+          sfdx sgd:source:delta -a 59.0 --to HEAD --from HEAD~ --output ./changed-sources/ --generate-delta
           echo "package.xml"
+          cat ./changed-sources/package.xml
           echo "destructivechanges.xml"
+          ./changed-sources/destructiveChanges.xml
       - name: eslint
         run: |
           echo "eslint results"
