@@ -50,7 +50,7 @@ jobs:
           echo "package.xml"
           cat ./package/package.xml
           echo "destructivechanges.xml"
-          ./destructiveChanges/destructiveChanges.xml
+          cat ./destructiveChanges/destructiveChanges.xml
       - name: eslint
         run: |
           echo "eslint results"
