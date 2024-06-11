@@ -34,7 +34,14 @@ jobs:
           echo "generating delta changes package"
           echo "package.xml"
           echo "destructivechanges.xml"
-        
+      - name: eslint
+        run: echo "eslint results"
+
+      - name: pmd scan
+        run: echo "pmd results"
+
+      - name: test classes and code coverage
+        run: echo "test results"
 
       - name: validate package
         run: echo "validating delta changes package"
@@ -42,7 +49,7 @@ jobs:
       - name: validate destructive package
         run: echo "validating delta changes destructive package"
 
-      - name: deploy
+      - name: deploy package
         run: echo "deploying delta changes package"
 
       - name: deploy destructive package
