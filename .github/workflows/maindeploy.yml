@@ -38,6 +38,7 @@ jobs:
         run: |
           echo "generating delta changes package"
           sf sgd:source:delta -a 59.0 --to ${{GITHUB_HEAD_REF}} --from ${{GITHUB_BASE_REF}} --output ./changed-sources/ --generate-delta
+          echo "sourcebranch: ${{GITHUB_HEAD_REF}} target branch:${{GITHUB_BASE_REF}} "
           echo "package.xml"
           cat ./changed-sources/package.xml
           echo "destructivechanges.xml"
