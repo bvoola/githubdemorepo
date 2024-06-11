@@ -68,6 +68,9 @@ jobs:
           version: '6.55.0'
           sourcePath: 'force-app'
           rulesets: 'ruleset.xml'      
+          
+      - name: codescan
+        run: echo "code scan running"
 
       # Check for PMD violations
       - name: 'Check for PMD violations'
@@ -78,17 +81,26 @@ jobs:
         run: echo "test results"
 
       - name: validate package
-        run: echo "validating delta changes package"
+        run: |
+          echo "validating delta changes package"
+          sf project deploy validate --manifest ./package/package.xml
+        
 
       - name: validate destructive package
-        run: echo "validating delta changes destructive package"
+        run: |
+          echo "validating delta changes destructive package"
+          sf project deploy validate --manifest ./destructiveChanges/destructiveChanges.xml
 
       - name: deploy package
-        run: echo "deploying delta changes package"
-
-      - name: deploy destructive package
-        run: echo "deploying delta changes destructive package"
+        run: |
+          echo "deploying delta changes package"
+          sf project deploy start --manifest ./package/package.xml
           
+      - name: deploy destructive package
+        run: |
+          echo "deploying delta changes destructive package"
+          sf project deploy start --manifest ./destructiveChanges/destructiveChanges.xml
+ 
          
           
         
