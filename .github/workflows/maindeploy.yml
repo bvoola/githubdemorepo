@@ -42,12 +42,12 @@ jobs:
         run: |
           echo "generating delta changes package"
           echo "source branch: ${{ github.head_ref }} target branch: ${{ github.base_ref }}"
-          sf sgd:source:delta -a 59.0 --to ${{github.base_ref}} --from ${{github.head_ref}} --output ./changed-sources/ --generate-delta
+          sf sgd:source:delta -a 59.0 --to ${{github.base_ref}} --from ${{github.head_ref}} --output .
           echo "sourcebranch: ${{github.head_ref}} target branch:${{github.base_ref}} "
           echo "package.xml"
-          cat ./changed-sources/package.xml
+          cat ./package/package.xml
           echo "destructivechanges.xml"
-          ./changed-sources/destructiveChanges.xml
+          ./destructiveChanges/destructiveChanges.xml
       - name: eslint
         run: |
           echo "eslint results"
