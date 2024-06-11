@@ -21,6 +21,7 @@ jobs:
         run: |
           npm install @salesforce/cli --global
           npm install --save-dev lint-staged
+          echo y | sfdx plugins:install sfdx-git-delta
         
       - name: check sfdx version
         run: |
