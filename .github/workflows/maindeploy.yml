@@ -14,8 +14,10 @@ jobs:
       - name: list files
         run: ls
         
-      - name: install sfdx cli
-        run: npm install @salesforce/cli --global
+      - name: install sfdx cli & lint
+        run: |
+          npm install @salesforce/cli --global
+          npm install --save-dev lint-staged
         
       - name: check sfdx version
         run: |
