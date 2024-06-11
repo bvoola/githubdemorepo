@@ -83,24 +83,30 @@ jobs:
       - name: validate package
         run: |
           echo "validating delta changes package"
+          if grep -q <types> ./package/package.xml; then
           sf project deploy validate --manifest ./package/package.xml -o bvoola@gmail.com.copadoproject
-        
+          fi
 
       - name: validate destructive package
         run: |
           echo "validating delta changes destructive package"
+          if grep -q <types> ./destructiveChanges/destructiveChanges.xml; then
           sf project deploy validate --manifest ./destructiveChanges/destructiveChanges.xml -o bvoola@gmail.com.copadoproject
-
+          fi
+          
       - name: deploy package
         run: |
           echo "deploying delta changes package"
+          if grep -q <types> ./destructiveChanges/destructiveChanges.xml; then
           sf project deploy start --manifest ./package/package.xml -o bvoola@gmail.com.copadoproject
+          fi
           
       - name: deploy destructive package
         run: |
           echo "deploying delta changes destructive package"
+          if grep -q <types> ./destructiveChanges/destructiveChanges.xml; then
           sf project deploy start --manifest ./destructiveChanges/destructiveChanges.xml -o bvoola@gmail.com.copadoproject
- 
+          fi
          
           
         
