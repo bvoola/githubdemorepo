@@ -6,4 +6,5 @@ private class SampleClassTest {
         System.assertEquals(5, result, 'Expected result to be 5');
     }
     /**** */
+    /*done*/
 }
