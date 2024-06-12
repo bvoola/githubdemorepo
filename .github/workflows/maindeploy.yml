@@ -1,23 +1,32 @@
 name: deploy developer code
-on: [push, pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
    # env:
     #  SF_ACCESS_TOKEN: ${{ secrets.SF_ACCESS_TOKEN }}
    # container:
    #   image: radon57/sfdx-cli
     steps:
       - name: get code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
         
       - name: list files
         run: ls
         
       - name: install sfdx cli & lint
         run: |
+          node --version
           npm install @salesforce/cli --global
           npm install --save-dev lint-staged
+          echo y | sf plugins:install sfdx-git-delta
+          sfdx sgd:source:delta --help
+
         
       - name: check sfdx version
         run: |
@@ -34,8 +43,14 @@ jobs:
       - name: generate package
         run: |
           echo "generating delta changes package"
+          echo "source branch: ${{ github.head_ref }} target branch: ${{ github.base_ref }}"
+          echo "source branch: $GITHUB_HEAD_REF target branch: $GITHUB_BASE_REF"
+          sf sgd:source:delta -a 59.0 --to ${{ github.event.pull_request.head.sha }} --from ${{ github.event.pull_request.base.sha }} --output .
+          echo "sourcebranch: ${{github.head_ref}} target branch:${{github.base_ref}} "
           echo "package.xml"
+          cat ./package/package.xml
           echo "destructivechanges.xml"
+          cat ./destructiveChanges/destructiveChanges.xml
       - name: eslint
         run: |
           echo "eslint results"
@@ -53,6 +68,9 @@ jobs:
           version: '6.55.0'
           sourcePath: 'force-app'
           rulesets: 'ruleset.xml'      
+          
+      - name: codescan
+        run: echo "code scan running"
 
       # Check for PMD violations
       - name: 'Check for PMD violations'
@@ -63,17 +81,32 @@ jobs:
         run: echo "test results"
 
       - name: validate package
-        run: echo "validating delta changes package"
+        run: |
+          echo "validating delta changes package"
+          if grep -q <types> ./package/package.xml; then
+          sf project deploy validate --manifest ./package/package.xml -o bvoola@gmail.com.copadoproject
+          fi
 
       - name: validate destructive package
-        run: echo "validating delta changes destructive package"
-
-      - name: deploy package
-        run: echo "deploying delta changes package"
-
-      - name: deploy destructive package
-        run: echo "deploying delta changes destructive package"
+        run: |
+          echo "validating delta changes destructive package"
+          if grep -q <types> ./destructiveChanges/destructiveChanges.xml; then
+          sf project deploy validate --manifest ./destructiveChanges/destructiveChanges.xml -o bvoola@gmail.com.copadoproject
+          fi
           
+      - name: deploy package
+        run: |
+          echo "deploying delta changes package"
+          if grep -q <types> ./destructiveChanges/destructiveChanges.xml; then
+          sf project deploy start --manifest ./package/package.xml -o bvoola@gmail.com.copadoproject
+          fi
+          
+      - name: deploy destructive package
+        run: |
+          echo "deploying delta changes destructive package"
+          if grep -q <types> ./destructiveChanges/destructiveChanges.xml; then
+          sf project deploy start --manifest ./destructiveChanges/destructiveChanges.xml -o bvoola@gmail.com.copadoproject
+          fi
          
           
         
