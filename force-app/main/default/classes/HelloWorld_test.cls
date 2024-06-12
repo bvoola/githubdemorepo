@@ -30,15 +30,15 @@ public class HelloWorldTest {
     }
       // Test method to verify the addNumbers method
                     @isTest
-          static void testAddNumbers() {
+            static void testAddNumbers() {
           // Test data
              Integer num1 = 5;
           Integer num2 = 7;
-          
+            
           // Call the addNumbers method
-          Integer sum = HelloWorld.addNumbers(num1, num2);
+              Integer sum = HelloWorld.addNumbers(num1, num2);
           
           // Verify the result
             System.assertEquals(12, sum);
-         }
+              }
 }
