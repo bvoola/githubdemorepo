@@ -5,5 +5,3 @@ jobs:
   steps:
     -name: get code
     -run: echo "getting code"
-    
-  

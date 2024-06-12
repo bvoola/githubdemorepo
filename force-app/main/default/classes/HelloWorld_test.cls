@@ -11,7 +11,7 @@ public class HelloWorldTest {
     String greeting = HelloWorld.greet(name);
 
     // Verify the result
-    System.assertEquals('Hello, TestUser! Welcome to Salesforc  e!', greeting);
+             System.assertEquals('Hello, TestUser! Welcome to Salesforc  e!', greeting);
   }
 
   // Test method to verify the addNumbers method
