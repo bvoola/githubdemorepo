@@ -33,6 +33,9 @@ jobs:
           sfdx -v
           sf -v
           
+      - name: authorize org with jwt
+        run: sfdx force:auth:jwt:grant --clientid ${{secrets.SF_CLENT_ID}} --jwtkeyfile ./server.key --username bvoola@gmail.com.copadoproject --instanceurl https://copadotrial91510619.my.salesforce.com/
+      
       - name: authorize org
         run: |
           echo ${{secrets.SF_AUTH_URL}} > ./SF_SFDX_URL.txt
