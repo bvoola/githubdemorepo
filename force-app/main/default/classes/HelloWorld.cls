@@ -1,5 +1,5 @@
 /************ */
-public class HelloWorld {
+public class HelloWorld { // NOPMD // NOPMD
   // Method to greet the user
   public static String greet(String name) {
     return 'Hello, ' + name + '! Welcome to Salesforce!';
