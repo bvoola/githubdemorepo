@@ -18,4 +18,6 @@ jobs:
 
       - name: Run SFDX Scanner - Report findings as comments
         uses: mitchspano/sfdx-scan-pull-request@v0.1.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.CODEANALYZER }}
         
