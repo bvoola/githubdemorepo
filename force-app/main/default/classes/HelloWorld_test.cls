@@ -7,6 +7,7 @@ public class HelloWorldTest {
     // Test data
     String name = 'TestUser';
 //commit 1
+//commit 2
     // Call the greet method
     String greeting = HelloWorld.greet(name);
     system.debug();
