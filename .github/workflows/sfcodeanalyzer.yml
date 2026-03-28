@@ -7,15 +7,17 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Install SFDX CLI and Scanner
         run: |
-          npm install sfdx-cli -g
+          npm install @salesforce/cli --global
           sfdx plugins:install @salesforce/sfdx-scanner
 
       - name: Run SFDX Scanner - Report findings as comments
         uses: mitchspano/sfdx-scan-pull-request@v0.1.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.CODEANALYZER }}
         
